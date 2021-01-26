@@ -36,7 +36,11 @@ export default function Home ({ allPostsData }) {
   )
 }
 
+/**
+ * SSG
+ */
 export async function getStaticProps() {
+  // 外部データを取得
   const allPostsData = getSortedPostsData()
   return {
     props: {
