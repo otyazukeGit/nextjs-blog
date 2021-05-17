@@ -60,7 +60,7 @@ export default function Layout({ children, home }) {
         </main>
         <aside className={styles.aside}>
           <img
-            src="/images/profile.jpg"
+            src="/images/my_image_400x400.jpg"
             className={`${styles.headerHomeImage} ${utilStyles.borderCircle}`}
             alt={name}
           />
