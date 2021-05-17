@@ -3,8 +3,8 @@ import styles from './layout.module.css'
 import utilStyles from '../styles/utils.module.css'
 import Link from 'next/link'
 
-const name = 'K.K'
-export const siteTitle = 'Next.js Sample Website'
+const name = 'Kaoru Kadowaki'
+export const siteTitle = "Kaoru's Tech Blog"
 
 export default function Layout({ children, home }) {
   return (
@@ -25,7 +25,8 @@ export default function Layout({ children, home }) {
         <meta name="twitter:card" content="summary_large_image" />
       </Head>
       <header className={styles.header}>
-        {home ? (
+        <div className={styles.headerTitle}>{siteTitle}</div>
+        {/* {home ? (
           <>
             <img
               src="/images/profile.jpg"
@@ -51,9 +52,22 @@ export default function Layout({ children, home }) {
               </Link>
             </h2>
           </>
-        )}
+        )} */}
       </header>
-      <main>{children}</main>
+      <div className={styles.content}>
+        <main className={styles.main}>
+          {children}
+        </main>
+        <aside className={styles.aside}>
+          <img
+            src="/images/profile.jpg"
+            className={`${styles.headerHomeImage} ${utilStyles.borderCircle}`}
+            alt={name}
+          />
+          <div className={utilStyles.colorInherit}>{name}</div>
+
+        </aside>
+      </div>
       {!home && (
         <div className={styles.backToHome}>
           <Link href="/">
