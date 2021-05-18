@@ -3,8 +3,18 @@ import Layout from '../../components/layout'
 import utilStyles from '../../styles/utils.module.css'
 import { getAllPostIds, getPostData } from '../../lib/posts'
 import Date from '../../components/date'
+import { GetStaticProps, GetStaticPaths } from 'next'
+import { ParsedUrlQuery } from 'querystring'
 
-export default function Post({ postData }) {
+export default function Post({
+  postData
+}: {
+  postData: {
+    title: string
+    date: string
+    contentHtml: string
+  }
+}) {
   return (
     <Layout>
       <Head>
@@ -21,7 +31,7 @@ export default function Post({ postData }) {
   )
 }
 
-export async function getStaticPaths() {
+export const getStaticPaths: GetStaticPaths = async () => {
   const paths = getAllPostIds()
   return {
     paths,
@@ -29,8 +39,19 @@ export async function getStaticPaths() {
   }
 }
 
-export async function getStaticProps({ params }) {
-  const postData = await getPostData(params.id)
+interface Props {
+  postData: {
+    id: string
+    contentHtml: string
+  }
+}
+interface Params extends ParsedUrlQuery {
+  id: string
+}
+export const getStaticProps: GetStaticProps<Props, Params> = async ({
+  params,
+}) => {
+  const postData = await getPostData(params!.id)
   return {
     props: {
       postData
