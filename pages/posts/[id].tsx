@@ -31,6 +31,8 @@ export default function Post({
   )
 }
 
+// getStaticPaths 関数は、ビルド時に静的にHTMLレンダリングしておくパスの一覧を決めておく関数です。
+// reuturnされた各path結果をgetStaticProps(params) に渡すことで各ページのプリレンダリングしておける。
 export const getStaticPaths: GetStaticPaths = async () => {
   const paths = getAllPostIds()
   return {
@@ -53,8 +55,6 @@ export const getStaticProps: GetStaticProps<Props, Params> = async ({
 }) => {
   const postData = await getPostData(params!.id)
   return {
-    props: {
-      postData
-    }
+    props: { postData }
   }
 }
